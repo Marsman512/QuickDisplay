@@ -26,7 +26,7 @@ public class DisplayManager {
 	/**
 	 * Initializes GLFW
 	 */
-	public static void init(int width, int height, String title) {
+	public static void init(DisplaySetup setup) {
 		if(initialized)
 			return;
 		initialized = true;
@@ -34,7 +34,10 @@ public class DisplayManager {
 		if(!glfwInit())
 			throw new IllegalStateException("Failed to initialize GLFW!");
 		
-		windowID = glfwCreateWindow(width, height, title, 0, 0);
+		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_RESIZABLE, setup.resizable ? GLFW_TRUE : GLFW_FALSE);
+		
+		windowID = glfwCreateWindow(setup.width, setup.height, setup.title, 0, 0);
 		if(windowID == 0L)
 			throw new RuntimeException("Failed to create the window!");
 		
