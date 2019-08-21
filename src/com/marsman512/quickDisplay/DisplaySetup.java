@@ -1,8 +1,5 @@
 package com.marsman512.quickDisplay;
 
-import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.glfw.GLFWVidMode;
-
 /**
  * This class holds the initial setup for the main window.
  * Pretend it's a C-style struct. There is no need for getters or setters in this class!
