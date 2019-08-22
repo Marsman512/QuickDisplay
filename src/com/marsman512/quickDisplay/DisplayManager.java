@@ -2,6 +2,7 @@ package com.marsman512.quickDisplay;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.Callbacks.*;
+import org.lwjgl.glfw.GLFWVidMode;
 
 import static org.lwjgl.opengl.GL11C.*;
 import org.lwjgl.opengl.GL;
@@ -164,6 +165,37 @@ public class DisplayManager {
 		// We have the close request cached from a callback,
 		// as calling native code over and over will slow the JVM down.
 		return closeRequested;
+	}
+	
+	/**
+	 * Centers the window on the primary monitor
+	 */
+	public static void centerOnDisplay() {
+		GLFWVidMode videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		
+		int windowX = (videoMode.width()  - displayProps.getWidth())  / 2;
+		int windowY = (videoMode.height() - displayProps.getHeight()) / 2;
+		
+		glfwSetWindowPos(windowID, windowX, windowY);
+	}
+	
+	/**
+	 * Centers the window on the workspace of the primary monitor
+	 */
+	public static void centerOnWorkspace() {
+		try(MemoryStack stack = MemoryStack.stackPush()) {
+			IntBuffer x = stack.callocInt(1);
+			IntBuffer y = stack.callocInt(1);
+			IntBuffer width = stack.callocInt(1);
+			IntBuffer height = stack.callocInt(1);
+			
+			glfwGetMonitorWorkarea(windowID, x, y, width, height);
+			
+			int windowX = ((width.get(0) - displayProps.getWidth()) / 2) + x.get(0);
+			int windowY = ((height.get(0) - displayProps.getHeight()) / 2) + y.get(0);
+			
+			glfwSetWindowPos(windowID, windowX, windowY);
+		}
 	}
 	
 	public static DisplayProps getDisplayProps() {
