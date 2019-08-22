@@ -14,6 +14,11 @@ public class DisplaySetup {
 	public boolean vsync = true;
 	public boolean resizable = false;
 	
+	/**
+	 * If the framebuffer is resized, correct it automatically.
+	 */
+	public boolean autoCorrectFramebufferSize = true;
+	
 	public DisplaySetup(int width, int height, String title) {
 		this.width = width;
 		this.height = height;
