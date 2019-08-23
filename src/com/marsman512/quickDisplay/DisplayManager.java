@@ -11,6 +11,8 @@ import org.lwjgl.opengl.GLCapabilities;
 import java.nio.IntBuffer;
 import org.lwjgl.system.MemoryStack;
 
+import com.marsman512.quickDisplay.input.Keyboard;
+
 import org.lwjgl.glfw.GLFWWindowCloseCallbackI;
 import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallbackI;
@@ -130,6 +132,9 @@ public class DisplayManager {
 		glfwSetWindowCloseCallback(windowID, windowCloseCB);
 		glfwSetWindowSizeCallback(windowID, windowSizeCB);
 		glfwSetFramebufferSizeCallback(windowID, framebufferSizeCB);
+		
+		// Initialize input classes
+		Keyboard.init();
 	}
 	
 	/**
@@ -153,6 +158,9 @@ public class DisplayManager {
 	 * Check for window events and swap the window's frame buffer
 	 */
 	public static void update() {
+		// Clear the previous frame's input cache.
+		Keyboard.update();
+		
 		// Check for events.
 		glfwPollEvents();
 		
@@ -222,5 +230,14 @@ public class DisplayManager {
 		boolean toReturn = windowResized;
 		windowResized = false;
 		return toReturn;
+	}
+	
+	/**
+	 * Returns the GLFW window handle.
+	 * Not meant for public use.
+	 * USE AT YOUR OWN DISCRETION!
+	 */
+	public static long getWindowID() {
+		return windowID;
 	}
 }
