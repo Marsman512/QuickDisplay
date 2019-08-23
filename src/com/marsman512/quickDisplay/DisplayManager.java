@@ -12,6 +12,7 @@ import java.nio.IntBuffer;
 import org.lwjgl.system.MemoryStack;
 
 import com.marsman512.quickDisplay.input.Keyboard;
+import com.marsman512.quickDisplay.input.Mouse;
 
 import org.lwjgl.glfw.GLFWWindowCloseCallbackI;
 import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
@@ -135,6 +136,7 @@ public class DisplayManager {
 		
 		// Initialize input classes
 		Keyboard.init();
+		Mouse.init();
 	}
 	
 	/**
@@ -160,6 +162,7 @@ public class DisplayManager {
 	public static void update() {
 		// Clear the previous frame's input cache.
 		Keyboard.update();
+		Mouse.update();
 		
 		// Check for events.
 		glfwPollEvents();

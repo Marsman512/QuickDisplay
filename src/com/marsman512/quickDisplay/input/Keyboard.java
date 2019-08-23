@@ -8,6 +8,12 @@ import com.marsman512.quickDisplay.DisplayManager;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * A simple utility for managing keyboard input
+ * @author Marsman512
+ * @since August 22, 2019
+ */
+
 public class Keyboard {
 	private static Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(100);
 	
