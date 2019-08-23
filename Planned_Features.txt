@@ -1,4 +1,3 @@
-Pixel format options
 Keyboard and mouse input
 Fullscreen windows
 Custom window icons

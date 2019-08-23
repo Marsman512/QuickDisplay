@@ -56,7 +56,7 @@ public class DisplayManager {
 	/**
 	 * Initializes GLFW
 	 */
-	public static void init(DisplaySetup setup, ContextSetup ctx) {
+	public static void init(DisplaySetup setup, ContextSetup ctx, PixelFormat pxl) {
 		// Don't call this function twice.
 		if(initialized)
 			return;
@@ -83,6 +83,15 @@ public class DisplayManager {
 			glfwWindowHint(GLFW_OPENGL_PROFILE, ctx.coreProfile ? GLFW_OPENGL_CORE_PROFILE : GLFW_OPENGL_COMPAT_PROFILE);
 		else
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+		
+		// Pixel format hints
+		glfwWindowHint(GLFW_RED_BITS, pxl.redBits);
+		glfwWindowHint(GLFW_GREEN_BITS, pxl.greenBits);
+		glfwWindowHint(GLFW_BLUE_BITS, pxl.blueBits);
+		glfwWindowHint(GLFW_ALPHA_BITS, pxl.alphaBits);
+		glfwWindowHint(GLFW_DEPTH_BITS, pxl.depthBits);
+		glfwWindowHint(GLFW_STENCIL_BITS, pxl.stencilBits);
+		glfwWindowHint(GLFW_SAMPLES, pxl.samples);
 		
 		// Create the window
 		windowID = glfwCreateWindow(setup.width, setup.height, setup.title, 0, 0);
@@ -189,7 +198,7 @@ public class DisplayManager {
 			IntBuffer width = stack.callocInt(1);
 			IntBuffer height = stack.callocInt(1);
 			
-			glfwGetMonitorWorkarea(windowID, x, y, width, height);
+			glfwGetMonitorWorkarea(glfwGetPrimaryMonitor(), x, y, width, height);
 			
 			int windowX = ((width.get(0) - displayProps.getWidth()) / 2) + x.get(0);
 			int windowY = ((height.get(0) - displayProps.getHeight()) / 2) + y.get(0);
