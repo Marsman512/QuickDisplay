@@ -134,9 +134,6 @@ public class DisplayManager {
 		glfwSetWindowSizeCallback(windowID, windowSizeCB);
 		glfwSetFramebufferSizeCallback(windowID, framebufferSizeCB);
 		
-		// Initialize input classes
-		Keyboard.init();
-		Mouse.init();
 	}
 	
 	/**
@@ -172,10 +169,14 @@ public class DisplayManager {
 	}
 	
 	/**
-	 * Make the window visible on the main display
+	 * Make the window visible on the main display and initialize inputs
 	 */
 	public static void show() {
 		glfwShowWindow(windowID);
+		
+		// Initialize input classes
+		Keyboard.init();
+		Mouse.init();
 	}
 	
 	/**

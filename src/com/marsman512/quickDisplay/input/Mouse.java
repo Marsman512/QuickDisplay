@@ -4,6 +4,9 @@ import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWCursorPosCallbackI;
 import com.marsman512.quickDisplay.DisplayManager;
 
+import org.lwjgl.system.MemoryStack;
+import java.nio.DoubleBuffer;
+
 /**
  * A simple utility for managing mouse inputs
  * @author Marsman512
@@ -13,18 +16,8 @@ import com.marsman512.quickDisplay.DisplayManager;
 public class Mouse {
 	private static double mouseX, mouseY;
 	private static double lastX, lastY;
-	private static boolean firstMouse = true;
 	
 	private static GLFWCursorPosCallbackI cursorPosCB = (long window, double x, double y) -> {
-		if(firstMouse) {
-			lastX = x;
-			lastY = y;
-			firstMouse = false;
-		} else {
-			lastX = mouseX;
-			lastY = mouseY;
-		}
-		
 		mouseX = x;
 		mouseY = y;
 	};
@@ -36,6 +29,19 @@ public class Mouse {
 	public static void init() {
 		long windowID = DisplayManager.getWindowID();
 		glfwSetCursorPosCallback(windowID, cursorPosCB);
+		
+		try(MemoryStack stack = MemoryStack.stackPush()) {
+			DoubleBuffer x = stack.callocDouble(1);
+			DoubleBuffer y = stack.callocDouble(1);
+			
+			glfwGetCursorPos(windowID, x, y);
+			
+			mouseX = x.get(0);
+			mouseY = y.get(0);
+			lastX = mouseX;
+			lastY = mouseY;
+		}
+		
 	}
 	
 	/**
@@ -43,7 +49,8 @@ public class Mouse {
 	 * DO NOT USE!
 	 */
 	public static void update() {
-		
+		lastX = mouseX;
+		lastY = mouseY;
 	}
 	
 	public static double getX() {
