@@ -80,13 +80,19 @@ public class Mouse {
 	
 	// Scrolling
 	private static double currentScrollPos = 0.0d;
+	private static double lastScrollDelta = 0.0d;
 	
 	private static GLFWScrollCallbackI scrollCB = (long window, double xoffset, double yoffset) -> {
 		currentScrollPos += yoffset;
+		lastScrollDelta = yoffset;
 	};
 	
 	public static double getScrollPos() {
 		return currentScrollPos;
+	}
+	
+	public static double getScrollDelta() {
+		return lastScrollDelta;
 	}
 	
 	// Internal methods
@@ -123,6 +129,9 @@ public class Mouse {
 		// Update mouse position variables
 		lastX = mouseX;
 		lastY = mouseY;
+		
+		// Reset the scroll delta
+		lastScrollDelta = 0.0d;
 		
 		// Clear event cache
 		buttonEvents.clear();
