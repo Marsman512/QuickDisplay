@@ -16,10 +16,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Keyboard {
 	private static Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(100);
+	private static boolean[] pressedKeys = new boolean[GLFW_KEY_LAST + 1];
 	
 	private static GLFWKeyCallbackI keyCB = (long window, int key, int scancode, int action, int mods) -> {
 		KeyEvent currentEvent = new KeyEvent(action, key);
 		keyEvents.add(currentEvent);
+		
+		pressedKeys[key] = (action == GLFW_RELEASE) ? false : true;
 	};
 	
 	public static boolean hasKeyEvents() {
@@ -28,6 +31,10 @@ public class Keyboard {
 	
 	public static KeyEvent getKeyEvent() {
 		return keyEvents.poll();
+	}
+	
+	public static boolean isKeyPressed(int key) {
+		return pressedKeys[key];
 	}
 	
 	/**
