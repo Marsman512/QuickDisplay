@@ -1,4 +1,3 @@
-Keyboard and mouse input
 Fullscreen windows
 Custom window icons
 Custom mouse cursors

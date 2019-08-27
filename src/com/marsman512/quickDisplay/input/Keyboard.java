@@ -202,5 +202,6 @@ public class Keyboard {
 	 */
 	public static void update() {
 		keyEvents.clear();
+		charEvents.clear();
 	}
 }
