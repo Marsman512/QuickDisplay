@@ -2,6 +2,7 @@ package com.marsman512.quickDisplay.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
+import org.lwjgl.glfw.GLFWCharCallbackI;
 
 import com.marsman512.quickDisplay.DisplayManager;
 
@@ -145,9 +146,12 @@ public class Keyboard {
         KEY_RIGHT_SUPER   = 347,
         KEY_MENU          = 348,
         KEY_LAST          = KEY_MENU;
+    
+    // Maximum event queue size
+    private static final int MAX_EVENT_QUEUE_SIZE = 110;
 	
     // Key events
-	private static Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(110);
+	private static Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(MAX_EVENT_QUEUE_SIZE);
 	private static boolean[] pressedKeys = new boolean[KEY_LAST + 1];
 	
 	private static GLFWKeyCallbackI keyCB = (long window, int key, int scancode, int action, int mods) -> {
@@ -165,10 +169,22 @@ public class Keyboard {
 		return keyEvents.poll();
 	}
 	
-	
-	
 	public static boolean isKeyPressed(int key) {
 		return pressedKeys[key];
+	}
+	
+	// Char events
+	private static Queue<Character> charEvents = new ArrayBlockingQueue<>(MAX_EVENT_QUEUE_SIZE);
+	private static GLFWCharCallbackI charCB = (long window, int codepoint) -> {
+		charEvents.add((char)codepoint);
+	};
+	
+	public static boolean hasCharEvents() {
+		return !charEvents.isEmpty();
+	}
+	
+	public static char getCharEvent() {
+		return charEvents.poll();
 	}
 	
 	/**
@@ -177,6 +193,7 @@ public class Keyboard {
 	 */
 	public static void init() {
 		glfwSetKeyCallback(DisplayManager.getWindowID(), keyCB);
+		glfwSetCharCallback(DisplayManager.getWindowID(), charCB);
 	}
 	
 	/**
