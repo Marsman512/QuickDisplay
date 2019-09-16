@@ -1,13 +1,15 @@
-package com.marsman512.quickDisplay.input;
+package me.marsman512.quickDisplay.input;
 
 import static org.lwjgl.glfw.GLFW.*;
-import com.marsman512.quickDisplay.DisplayManager;
 
 import org.lwjgl.glfw.GLFWCursorPosCallbackI;
 import org.lwjgl.glfw.GLFWMouseButtonCallbackI;
 import org.lwjgl.glfw.GLFWScrollCallbackI;
 
 import org.lwjgl.system.MemoryStack;
+
+import me.marsman512.quickDisplay.DisplayManager;
+
 import java.nio.DoubleBuffer;
 
 import java.util.Queue;

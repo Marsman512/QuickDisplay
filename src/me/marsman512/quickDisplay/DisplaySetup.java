@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay;
+package me.marsman512.quickDisplay;
 
 /**
  * This class holds the initial setup for the main window.

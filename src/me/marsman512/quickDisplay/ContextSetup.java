@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay;
+package me.marsman512.quickDisplay;
 
 /**
  * A class containing the initial setup for an OpenGL context.

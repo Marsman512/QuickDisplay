@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay;
+package me.marsman512.quickDisplay;
 
 /**
  * Initial pixel format data for the OpenGL context.

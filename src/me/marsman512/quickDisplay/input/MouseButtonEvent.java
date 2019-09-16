@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay.input;
+package me.marsman512.quickDisplay.input;
 
 public class MouseButtonEvent {
 	public final int

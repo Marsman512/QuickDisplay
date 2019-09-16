@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay;
+package me.marsman512.quickDisplay;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GLCapabilities;
 import java.nio.IntBuffer;
 import org.lwjgl.system.MemoryStack;
 
-import com.marsman512.quickDisplay.input.Keyboard;
-import com.marsman512.quickDisplay.input.Mouse;
+import me.marsman512.quickDisplay.input.Keyboard;
+import me.marsman512.quickDisplay.input.Mouse;
 
 import org.lwjgl.glfw.GLFWWindowCloseCallbackI;
 import org.lwjgl.glfw.GLFWWindowSizeCallbackI;

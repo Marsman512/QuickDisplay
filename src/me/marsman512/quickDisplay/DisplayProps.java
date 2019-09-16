@@ -1,4 +1,4 @@
-package com.marsman512.quickDisplay;
+package me.marsman512.quickDisplay;
 
 public class DisplayProps {
 	/** The size of the window */

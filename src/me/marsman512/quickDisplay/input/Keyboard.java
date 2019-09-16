@@ -1,10 +1,11 @@
-package com.marsman512.quickDisplay.input;
+package me.marsman512.quickDisplay.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
-import org.lwjgl.glfw.GLFWCharCallbackI;
 
-import com.marsman512.quickDisplay.DisplayManager;
+import me.marsman512.quickDisplay.DisplayManager;
+
+import org.lwjgl.glfw.GLFWCharCallbackI;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
