@@ -1,5 +1,10 @@
 package me.marsman512.quickDisplay;
 
+/**
+ * A class containing information about the current window's state
+ * @author Marsman512
+ */
+
 public class DisplayProps {
 	/** The size of the window */
 	private int width, height;
